@@ -1,0 +1,14 @@
+CREATE EXTENSION simple;
+SELECT int_func(10);
+ int_func 
+----------
+       20
+(1 row)
+
+SELECT text_func('Ahoj');
+NOTICE:  input string is: "Ahoj"
+  text_func  
+-------------
+ Ahoj, světe
+(1 row)
+

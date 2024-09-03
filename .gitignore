@@ -1,0 +1,10 @@
+*.o
+*.a
+*.so
+*.so.*
+*.sdf
+*.suo
+*.*.user
+*.bc
+/.deps/
+/results
