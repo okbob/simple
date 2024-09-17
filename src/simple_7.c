@@ -53,7 +53,6 @@ text_func(PG_FUNCTION_ARGS)
 	Oid			types[1];
 	int			res;
 	Datum		result;
-	MemoryContext call_mcxt;
 
 	if (PG_ARGISNULL(0))
 	{
@@ -67,8 +66,6 @@ text_func(PG_FUNCTION_ARGS)
 
 	elog(NOTICE, "input string is: \"%s\"", text_to_cstring(DatumGetTextP(args[0])));
 
-	call_mcxt = CurrentMemoryContext;
-
 	SPI_connect();
 
 	res = SPI_execute_with_args("SELECT ($1 || ', světe')::text",
@@ -78,7 +75,6 @@ text_func(PG_FUNCTION_ARGS)
 	if (res == SPI_OK_SELECT)
 	{
 		TupleDesc   tupdesc;
-		MemoryContext oldcxt;
 		bool		isnull;
 		HeapTuple	tuple;
 
