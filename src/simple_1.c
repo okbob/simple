@@ -22,9 +22,6 @@ PG_MODULE_MAGIC;
 PG_FUNCTION_INFO_V1(int_func);
 PG_FUNCTION_INFO_V1(text_func);
 
-Datum int_func(PG_FUNCTION_ARGS);
-Datum text_func(PG_FUNCTION_ARGS);
-
 Datum
 int_func(PG_FUNCTION_ARGS)
 {

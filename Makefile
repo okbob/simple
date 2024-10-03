@@ -1,5 +1,5 @@
 DATA         = $(wildcard sql/*.sql)
-MODULES      = $(patsubst %.c,%,$(wildcard src/*.c))
+MODULES      = $(patsubst %.c,%,$(wildcard src/simple.c))
 EXTENSION    = simple
 
 TESTS        = $(wildcard test/sql/*.sql)

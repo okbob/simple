@@ -24,7 +24,6 @@ PG_MODULE_MAGIC;
 PG_FUNCTION_INFO_V1(int_func);
 PG_FUNCTION_INFO_V1(text_func);
 
-
 /*
  *
  *
