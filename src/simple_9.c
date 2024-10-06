@@ -37,6 +37,11 @@ int_func(PG_FUNCTION_ARGS)
 	PG_RETURN_INT32(arg + 10);
 }
 
+/*
+ * We are able to process nodes dynamicaly. Nodes holds type info.
+ * Use castNode for safe cast (with assertions) or nodeTag to get
+ * node tag (type enum) or IsA function.
+ */
 static
 char *concat_list(List *vals, char *delim)
 {
@@ -75,6 +80,9 @@ char *concat_list(List *vals, char *delim)
 	return rstr.data;
 }
 
+/*
+ * Defelem Node (named value) is often used type.
+ */
 Datum
 text_func(PG_FUNCTION_ARGS)
 {

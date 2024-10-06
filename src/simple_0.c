@@ -30,6 +30,17 @@ int_func(PG_FUNCTION_ARGS)
 	PG_RETURN_INT32(arg + 10);
 }
 
+/*
+ * the values based on VARLENA type (with dynamic size) can toasted
+ * (compressed, moved out-of-line), and then the format can be dynamic.
+ * Macros with suffix _ANY supports all formats. For output we produce
+ * data in basic format, and then we should not to use macros with
+ * suffix _ANY.
+ * Macros with _PP suffix returns packed header (macros _ANY should
+ * be used for processing). Macros with just _P returns unpacked data
+ * (but it can do some memory allocation and copy). These macros
+ * should not be used today.
+ */
 Datum
 text_func(PG_FUNCTION_ARGS)
 {

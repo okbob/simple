@@ -101,6 +101,7 @@ text_func(PG_FUNCTION_ARGS)
 
 		oldcxt = MemoryContextSwitchTo(call_mcxt);
 
+		/* Use generic function for copy any value of SQL type */
 		result = datumCopy(result, false, -1);
 
 		MemoryContextSwitchTo(oldcxt);

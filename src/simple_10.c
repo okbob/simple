@@ -33,7 +33,6 @@ static Oid int_func_oid = InvalidOid;
 
 #define SIMPLE_MAGIC		2024100316
 
-
 typedef struct
 {
 	int			magic;
@@ -42,6 +41,12 @@ typedef struct
 	Datum		prev_arg;
 } simple_fmgr_cache;
 
+/*
+ * This is an example of fmgr hook - this hook is used for any
+ * call of SQL function. It is one possibility for handling an
+ * exeption inside SQL function. Note: the exception cannot be
+ * ignored.
+ */
 Datum
 int_func(PG_FUNCTION_ARGS)
 {
@@ -111,7 +116,10 @@ simple_needs_fmgr_hook(Oid fn_oid)
 
 	return fn_oid == text_func_oid || fn_oid == int_func_oid;
 }
-
+/*
+ * Inside hooks we should to think about other extensions
+ * that can to use same hook.
+ */
 static void
 simple_fmgr_hook(FmgrHookEventType event,
 					FmgrInfo *flinfo, Datum *private)
@@ -174,6 +182,11 @@ simple_fmgr_hook(FmgrHookEventType event,
 		(*prev_fmgr_hook) (event, flinfo, &fcache->prev_arg);
 }
 
+/*
+ * module init function - attention, we cannot to touch
+ * system catalog there. It can be loaded (from shared_preload_libraries)
+ * before system catalog is prepared.
+ */
 void
 _PG_init(void)
 {

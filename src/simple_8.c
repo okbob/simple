@@ -35,6 +35,10 @@ int_func(PG_FUNCTION_ARGS)
 	PG_RETURN_INT32(arg + 10);
 }
 
+/*
+ * List is an list of nodes. In this example
+ * list of String nodes.
+ */
 static
 char *concat_list(List *strings)
 {
@@ -51,6 +55,11 @@ char *concat_list(List *strings)
 	return rstr.data;
 }
 
+/*
+ * Very important part of Postgres is processing Node based
+ * structs. It allows comfortable work with dynamic structs.
+ * Node based structs can be printed, compared, copied, ..
+ */
 Datum
 text_func(PG_FUNCTION_ARGS)
 {
@@ -69,4 +78,3 @@ text_func(PG_FUNCTION_ARGS)
 
 	PG_RETURN_TEXT_P(cstring_to_text(concat_list(strings)));
 }
-

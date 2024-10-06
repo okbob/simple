@@ -22,6 +22,10 @@ PG_MODULE_MAGIC;
 PG_FUNCTION_INFO_V1(int_func);
 PG_FUNCTION_INFO_V1(text_func);
 
+/*
+ * Example of direct function call (calling SQL function
+ * from an extension. The returned value should not be NULL.
+ */
 Datum
 int_func(PG_FUNCTION_ARGS)
 {

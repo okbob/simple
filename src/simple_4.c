@@ -91,6 +91,10 @@ text_func(PG_FUNCTION_ARGS)
 
 		elog(NOTICE, "result: %s", result);
 
+		/*
+		 * The result should be copied to call MemoryContext
+		 * before closing SPI.
+		 */
 		oldcxt = MemoryContextSwitchTo(call_mcxt);
 
 		txt_result = cstring_to_text(result);

@@ -102,10 +102,14 @@ text_func(PG_FUNCTION_ARGS)
 
 		elog(NOTICE, "result: %s", TextDatumGetCString(result));
 
+		/*
+		 * Read info about result's types.
+		 */
 		get_typlenbyval(SPI_gettypeid(tupdesc, 1), &typlen, &typbyval);
 
 		oldcxt = MemoryContextSwitchTo(call_mcxt);
 
+		/* Use real result meta data instead constants */
 		result = datumCopy(result, typbyval, typlen);
 
 		MemoryContextSwitchTo(oldcxt);

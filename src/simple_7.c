@@ -90,6 +90,7 @@ text_func(PG_FUNCTION_ARGS)
 			elog(ERROR, "unexpected type of result column `%s`",
 				format_type_be(SPI_gettypeid(tupdesc, 1)));
 
+		/* SPI_copytuple does copy to outer memory context */
 		tuple = SPI_copytuple(SPI_tuptable->vals[0]);
 
 		result = SPI_getbinval(tuple, tupdesc, 1, &isnull);

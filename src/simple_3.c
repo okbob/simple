@@ -43,6 +43,11 @@ int_func(PG_FUNCTION_ARGS)
 	PG_RETURN_DATUM(result);
 }
 
+/*
+ * Using SPI API - an api for execution SQL from an extension.
+ * Use elog(NOTICE, ...) for debug output. This example should
+ * not to work.
+ */
 Datum
 text_func(PG_FUNCTION_ARGS)
 {

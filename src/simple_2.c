@@ -41,6 +41,9 @@ int_func(PG_FUNCTION_ARGS)
 	PG_RETURN_DATUM(result);
 }
 
+/*
+ * Correct NULL handling and raising an error
+ */
 Datum
 text_func(PG_FUNCTION_ARGS)
 {
